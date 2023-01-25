@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-// import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import * as Yup from 'yup';
 import {useFormik, FormikProvider} from 'formik';
 import Card from '../components/Card';
@@ -10,6 +10,7 @@ import Button from '../components/Button';
 import SpinLoading from '../components/SpinLoader';
 import StyledNavLink from '../components/StyledNavLink';
 import {clearMessage} from '../store/messageSlice';
+import {signUp} from '../store/authSlice';
 
 const signUpSchema = Yup.object({
   username: Yup.string()
@@ -33,7 +34,7 @@ const SignUpPage = () => {
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
   const {message} = useSelector((state) => state.message);
-  // const history = useHistory();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,22 +42,21 @@ const SignUpPage = () => {
   }, [dispatch]);
 
   const handleSubmit = (formValues) => {
-    console.log(formValues);
-    // const {username, email, password} = formValues;
+    const {username, email, password} = formValues;
     setLoading(true);
     setSuccessful(false);
-    // dispatch(signUp({username, email, password}))
-    //   .unwrap()
-    //   .then(() => {
-    //     setSuccessful(true);
-    //     history.push('/');
-    //   })
-    //   .catch(() => {
-    //     setSuccessful(false);
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
+    dispatch(signUp({username, email, password}))
+      .unwrap()
+      .then(() => {
+        setSuccessful(true);
+        history.push('/main');
+      })
+      .catch(() => {
+        setSuccessful(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const formik = useFormik({
@@ -67,7 +67,7 @@ const SignUpPage = () => {
 
   return (
     <>
-      <Card.Title>Sign Up</Card.Title>
+      <Card.Title>Регистрация</Card.Title>
 
       <FormikProvider value={formik}>
         {!successful && (
@@ -112,8 +112,8 @@ const SignUpPage = () => {
           </div>
         )}
       </FormikProvider>
-      <p className='text-slate-600 text-sm'>
-        <span>У Вас уже есть аккаунт?</span>
+      <p className='text-slate-600 text-sm text-center'>
+        <span>У Вас уже есть аккаунт? </span>
         <StyledNavLink
           styleType='underline'
           to='/auth/login'

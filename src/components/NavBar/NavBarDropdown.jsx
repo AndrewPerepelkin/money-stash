@@ -1,18 +1,17 @@
 import React, {Fragment} from 'react';
 import {Menu, Transition} from '@headlessui/react';
 import {ChevronDownIcon} from '@heroicons/react/solid';
-// import {useSelector} from 'react-redux';
-// import {getCurrentUser} from '../../store/authSlice';
+import {useSelector} from 'react-redux';
 import {NavLink} from 'react-router-dom';
-// import useLogout from '../../hooks/useLogout';
+import {getCurrentUser} from '../../store/authSlice';
+import useLogout from '../../hooks/useLogout';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 const NavBarDropdown = () => {
-  //   const user = useSelector(getCurrentUser());
-  //   const handleLogout = useLogout();
-  const handleLogout = () => console.log('logout');
+  const user = useSelector(getCurrentUser());
+  const handleLogout = useLogout();
 
   return (
     <Menu
@@ -21,13 +20,12 @@ const NavBarDropdown = () => {
     >
       <Menu.Button className='flex items-center w-full rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-500 focus:outline-none '>
         <img
-          // src={user.avatar}
-          src='/assets/img/user.png'
+          src={user.avatar}
+          // src='/assets/img/user.png'
           className='inline-block h-6 rounded-full pr-2 w-auto'
           alt='Logo'
         />
-        {/* {user.username} */}
-        {'Username'}
+        {user.username}
         <ChevronDownIcon
           className='-mr-1 ml-2 h-5 w-5'
           aria-hidden='true'

@@ -1,14 +1,13 @@
-// import { combineReducers } from "redux";
 import authReducer from './authSlice';
+import incomeReducer from './incomeSlice';
 import messageReducer from './messageSlice';
-// import postsReducer from "./postsSlice";
 
 const {combineReducers, configureStore} = require('@reduxjs/toolkit');
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  message: messageReducer
-  // posts: postsReducer,
+  message: messageReducer,
+  income: incomeReducer
 });
 
 export function createStore() {

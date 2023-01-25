@@ -17,7 +17,7 @@ const AuthLayout = () => {
   //     }
 
   return (
-    <div className='flex grow flex-col justify-center items-center  dark:text-slate-200 '>
+    <div className='flex grow flex-col justify-center items-center dark:text-slate-200 '>
       <Card>
         <Switch>
           <Route

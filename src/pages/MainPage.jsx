@@ -1,7 +1,12 @@
 import React from 'react';
+import IncomeList from '../components/Income/IncomeList';
 
 const MainPage = () => {
-  return <div>MainPage</div>;
+  return (
+    <>
+      <IncomeList />
+    </>
+  );
 };
 
 export default MainPage;

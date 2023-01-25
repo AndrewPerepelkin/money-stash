@@ -1,4 +1,6 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
+import {isLoggedInSelector} from '../../store/authSlice';
 import StyledNavLink from '../StyledNavLink';
 import NavBarDropdown from './NavBarDropdown';
 import NavBarLinkList from './NavBarLinkList';
@@ -6,19 +8,18 @@ import NavBarLogo from './NavBarLogo';
 import NavBarWrapper from './NavBarWrapper';
 
 const NavBar = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = useSelector(isLoggedInSelector());
   return (
     <NavBarWrapper>
       <NavBarLogo
-        link='/'
+        link={isLoggedIn ? '/main' : '/'}
         src='/assets/img/s-logo.png'
         label='Money Stash'
       />
       <NavBarLinkList>
         {isLoggedIn ? (
           <>
-            <StyledNavLink to='/income'>Счета</StyledNavLink>
-            <StyledNavLink to='/expenses'>Расходы</StyledNavLink>
+            <StyledNavLink to='/main/history'>История операций</StyledNavLink>
             <NavBarDropdown />
           </>
         ) : (

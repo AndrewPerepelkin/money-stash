@@ -1,8 +1,10 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
+import ProtectedRoute from './components/common/ProtectedRoute';
 import NavBar from './components/NavBar/NavBar';
 import AuthLayout from './layouts/AuthLayout';
-import MainPage from './pages/MainPage';
+import ExamplePage from './pages/ExamplePage';
+import MainPageLayout from './layouts/MainPageLayout';
 
 function App() {
   return (
@@ -12,12 +14,20 @@ function App() {
         <Route
           exact
           path='/'
-          component={MainPage}
+          component={ExamplePage}
         />
         <Route
           path='/auth'
           component={AuthLayout}
         />
+        <ProtectedRoute
+          path='/main'
+          component={MainPageLayout}
+        />
+        {/* <Redirect
+          from='*'
+          to='/'
+        /> */}
       </Switch>
     </div>
   );

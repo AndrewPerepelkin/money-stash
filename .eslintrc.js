@@ -12,6 +12,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     semi: [2, 'always'],
+    camelcase: 'off',
     'space-before-function-paren': [
       'error',
       {anonymous: 'always', named: 'never'}
