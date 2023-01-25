@@ -16,17 +16,19 @@ const IncomeList = () => {
 
   return (
     <>
-      <h2 className='text-blue-200 bold'>Поступления:</h2>
+      {income && !displaySkeleton && (
+        <>
+          <h2 className='text-blue-200 bold'>Доходы</h2>
+          {income.map((item) => (
+            <IncomeListItem
+              key={'income-' + item.id}
+              item={item}
+            />
+          ))}
+          <IncomeСhart income={income} />
+        </>
+      )}
       {displaySkeleton && <h2 className='text-white'>Loading...</h2>}
-      {income &&
-        !displaySkeleton &&
-        income.map((item) => (
-          <IncomeListItem
-            key={'income-' + item.id}
-            item={item}
-          />
-        ))}
-      {income && !displaySkeleton && <IncomeСhart income={income} />}
     </>
   );
 };
